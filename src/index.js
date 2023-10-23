@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
-const App = () => {
- return <h1>Hello Mom</h1>;
- }
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme";
+import GlobalFonts from "./assets/fonts/fonts";
+import AccordionCard from "./components/AccordionCard";
 
- const root = ReactDOM.createRoot(document.getElementById("root"));
- root.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalFonts />
+      <AccordionCard />
+    </ThemeProvider>
   </React.StrictMode>
 );
