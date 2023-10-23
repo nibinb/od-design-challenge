@@ -13,7 +13,7 @@ const CARD_OPTIONS = [
     cardType: "listing",
     title: "List with us",
     offerText: "Estimated offer",
-    priceRange: "$$445K–$550K",
+    priceRange: "$445K–$550K",
     recommended: true,
     description:
       "A top local agent will help you list for more money. We’ll lock in your final cash offer for 60 days.",
@@ -247,6 +247,7 @@ function AccordionCard() {
             const isActive = index == active;
             return (
               <div
+              key={option.id}
                 className={`list-section ${
                   isActive ? "list-section--active" : "list-section--hidden"
                 }`}
