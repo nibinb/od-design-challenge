@@ -11,6 +11,7 @@ const CardStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 
   & .padding-left-7 {
     padding-left: 7px;

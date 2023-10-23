@@ -22,6 +22,11 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: "file-loader",
       },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
+        loader: "url-loader",
+        options: { limit: false },
+      },
     ],
   },
   plugins: [htmlPlugin],
