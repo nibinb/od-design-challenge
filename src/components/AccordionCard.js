@@ -189,22 +189,11 @@ function AccordionCard() {
     );
 
     pushBack.then(() => {
-      animate(
-        currentCard,
-        {
-          y: [null, CARD_OFFSET_OTHER],
-
-          zIndex: [null, 0],
-          scale: [null, SCALE_FACTOR],
-        }
-        // {
-        //   transition: {
-        //     ease: "linear",
-        //     duration: 5,
-        //     y: { duration: 5 }
-        //   }
-        // }
-      );
+      animate(currentCard, {
+        y: [null, CARD_OFFSET_OTHER],
+        zIndex: [null, 0],
+        scale: [null, SCALE_FACTOR],
+      });
     });
 
     pushFront.then(() => {

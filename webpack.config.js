@@ -3,7 +3,13 @@ const htmlPlugin = new HtmlWebPackPlugin({
  template: './src/index.html',
  filename: './index.html'
 });
+const path = require("path");
 module.exports = {
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "bundle.js",
+    publicPath: "/",
+  },
   mode: "development",
   module: {
     rules: [
@@ -28,6 +34,11 @@ module.exports = {
         options: { limit: false },
       },
     ],
+  },
+  devServer: {
+    hot: true,
+    port: 3000,
+    open: true,
   },
   plugins: [htmlPlugin],
 };
