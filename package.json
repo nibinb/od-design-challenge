@@ -24,6 +24,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "@rive-app/react-canvas": "^4.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

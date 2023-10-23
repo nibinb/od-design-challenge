@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
+import Home from './pages/Home';
 const App = () => {
- return <h1>Hello Mom</h1>;
+ return <Home></Home>;
  }
 
  const root = ReactDOM.createRoot(document.getElementById("root"));
