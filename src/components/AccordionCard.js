@@ -6,42 +6,7 @@ import AccordionContent from "./AccordionContent";
 import downArrow from "../assets/icons/caret-down.svg";
 import upArrow from "../assets/icons/caret-up.svg";
 import rigthChevron from "../assets/icons/chevron-right.svg";
-
-const CARD_OPTIONS = [
-  {
-    id: "1",
-    cardType: "listing",
-    title: "List with us",
-    offerText: "Estimated offer",
-    priceRange: "$445K–$550K",
-    recommended: true,
-    description:
-      "A top local agent will help you list for more money. We’ll lock in your final cash offer for 60 days.",
-    points: [
-      "Offer Lock included",
-      "More visibility, more buyers",
-      "Local agent assistance",
-    ],
-  },
-  {
-    id: "2",
-    cardType: "selling",
-    title: "Sell to us",
-    offerText: "Estimated offer",
-    priceRange: "$445K–$550K",
-    description:
-      "We’ll buy your home directly. Choose your close date and move on your schedule.",
-    points: [
-      "All-cash offer",
-      "The fastest way to sell",
-      "Skip showings & repairs",
-    ],
-  },
-];
-const CARD_OFFSET = 15;
-const CARD_OFFSET_OTHER = -98;
-const CARD_JUMP = 200;
-const SCALE_FACTOR = 0.8;
+import {CARD_OPTIONS, CARD_VARIANTS} from '../constants'
 
 const AppView = styled.div`
   display: flex;
@@ -58,7 +23,7 @@ const AppView = styled.div`
 
   & .cmp-compare {
     display: flex;
-    align-tems: center;
+    margin-top: 32px;
 
     .cmp-compare__text {
       color: ${(props) => props.theme.blue500};
@@ -119,7 +84,7 @@ const AppView = styled.div`
         flex: 1;
         font-family: ${(props) => props.theme.mediumFontFamily};
         font-size: ${(props) => props.theme.medFontSize};
-        letter-spacing: var(--170-med-letter-spacing);
+        letter-spacing: -0.896px;
         line-height: 110%;
       }
       .cmp-accordion-header__icon {
@@ -140,94 +105,33 @@ const AppView = styled.div`
       }
     }
   }
-
-  & .gradient {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgb(255, 255, 255) 100%
-    );
-    height: 24px;
-  }
 `;
 
 function AccordionCard() {
-  const [options, setOptions] = React.useState(CARD_OPTIONS);
+  const [options] = React.useState(CARD_OPTIONS);
   const [active, setActive] = React.useState(options.length - 1);
-
-  const [scope, animate] = useAnimate();
-
-  const toggleCard = (index) => {
-    setActive(index);
-    const otherCard = document.querySelector(".list--hidden");
-    const currentCard = document.querySelector(".list--active");
-    const pushBack = animate(
-      currentCard,
-      {
-        y: CARD_JUMP,
-      },
-      {
-        transition: {
-          type: "spring",
-          stiffness: 1000,
-        },
-      }
-    );
-
-    // bring white card front
-    const pushFront = animate(
-      otherCard,
-      {
-        y: -CARD_JUMP,
-      },
-      {
-        transition: {
-          type: "spring",
-          stiffness: 1000,
-        },
-      }
-    );
-
-    pushBack.then(() => {
-      animate(currentCard, {
-        y: [null, CARD_OFFSET_OTHER],
-        zIndex: [null, 0],
-        scale: [null, SCALE_FACTOR],
-      });
-    });
-
-    pushFront.then(() => {
-      animate(otherCard, {
-        y: [null, CARD_OFFSET],
-        zIndex: [null, 1],
-        scale: [null, 1],
-      });
-    });
-  };
 
   const toggleAccordion = (index) => {
     if (index === active) {
       return;
     }
     setActive(index);
-    toggleCard(index);
   };
 
   return (
     <AppView>
       <div className="cmp-card">
         <div className="card-section">
-          <ul ref={scope}>
+          <ul>
             {options?.map((option, index) => {
               const isActive = index == active;
               return (
                 <motion.li
                   key={option.id}
-                  onClick={isActive ? null : (e) => toggleAccordion(index)}
-                  initial={{
-                    scale: isActive ? 1 : SCALE_FACTOR,
-                    y: isActive ? CARD_OFFSET : CARD_OFFSET_OTHER,
-                  }}
+                  onClick={() => toggleAccordion(index)}
+                  variants={CARD_VARIANTS}
+                  animate={isActive ? "goUp" : "goDown"}
+                  initial={false}
                   className={
                     isActive ? "list list--active" : "list list--hidden"
                   }

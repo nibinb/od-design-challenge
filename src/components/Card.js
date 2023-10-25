@@ -12,7 +12,11 @@ const CardStyle = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-
+  box-shadow: 0px 0px 0px 0px rgba(3, 4, 7, 0.08), 0px 2px 5px 0px rgba(3, 4, 7, 0.08), 0px 9px 9px 0px rgba(3, 4, 7, 0.07), 0px 20px 12px 0px rgba(3, 4, 7, 0.04), 0px 35px 14px 0px rgba(3, 4, 7, 0.01), 0px 55px 15px 0px rgba(3, 4, 7, 0.00);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  
   & .padding-left-7 {
     padding-left: 7px;
   }
